@@ -1,266 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Kanna ❤️</title>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For My Laddu ❤️</title>
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-}
-.container{
-text-align:center;
-z-index:2;
-max-width: 95%;
-width: 460px;
-}
-h1{
-font-size:42px;
-color:white;
-margin-bottom:20px;
-text-shadow:2px 2px 10px rgba(0,0,0,0.4);
-}
-.box {
-background: white;
-padding: 25px;
-border-radius: 20px;
-box-shadow: 0px 10px 30px rgba(0,0,0,0.2);
-animation: fadeIn 0.5s ease-in-out forwards;
-}
-.question-text {
-font-size: 24px;
-color: #d81b60;
-margin-bottom: 25px;
-font-weight: bold;
-line-height: 1.4;
-}
-.btn-container {
-display: flex;
-flex-direction: column;
-gap: 15px;
-}
-button {
-padding: 15px 25px;
-font-size: 20px;
-border: none;
-border-radius: 40px;
-cursor: pointer;
-background:#ff4081;
-color:white;
-transition:.3s;
-font-weight: bold;
-}
-button:hover {
-transform:scale(1.05);
-background:#ff0055;
-}
-.whatsapp-btn {
-background: #25D366;
-margin-top: 15px;
-padding: 12px 20px;
-font-size: 18px;
-}
-.whatsapp-btn:hover {
-background: #128C7E;
-}
-.summary-text {
-font-size: 18px;
-color: #444;
-line-height: 1.6;
-text-align: left;
-margin-bottom: 20px;
-background: #fff0f5;
-padding: 15px;
-border-radius: 12px;
-border-left: 5px solid #ff4081;
-}
-.letter-box {
-background: #fffafb;
-padding: 20px;
-border-radius: 15px;
-border: 1px dashed #ff4081;
-text-align: center;
-margin-top: 15px;
-box-shadow: inset 0 0 10px rgba(255,64,129,0.05);
-}
-.letter-text {
-font-size: 18px;
-color: #d81b60;
-line-height: 1.6;
-font-style: italic;
-white-space: pre-line;
-font-weight: bold;
-}
-.flower{
-position:absolute;
-font-size:35px;
-animation:fall linear infinite;
-}
-@keyframes fall{
-0%{transform:translateY(-100px) rotate(0deg);}
-100%{transform:translateY(110vh) rotate(360deg);}
-}
-@keyframes fadeIn {
-from { opacity: 0; transform: scale(0.9); }
-to { opacity: 1; transform: scale(1); }
-}
-</style>
-</head>
-<body>
-
-<div class="container">
-  <!-- Start Screen -->
-  <div id="start-box" class="box">
-    <h1>💖 Hi Kanna 💖</h1>
-    <div class="btn-container">
-      <button onclick="startSurprise()">Open Your Surprise ❤️</button>
-    </div>
-  </div>
-
-  <!-- Question Screen -->
-  <div id="question-box" class="box" style="display: none;">
-    <div id="question-title" class="question-text">Question goes here?</div>
-    <div class="btn-container" id="option-buttons"></div>
-  </div>
-
-  <!-- Final Screen -->
-  <div id="final-box" class="box" style="display: none; max-height: 85vh; overflow-y: auto;">
-    <h1 style="color: #ff4081; font-size: 32px; text-shadow: none; margin-bottom: 15px;">💝 Your Choices! 💝</h1>
-    <div class="summary-text" id="summary-content"></div>
-    
-    <!-- WhatsApp Action Button -->
-    <button class="whatsapp-btn" onclick="sendToWhatsApp()">Send Answers to Me via WhatsApp 💬</button>
-    
-    <!-- Your Personal Letter -->
-    <div class="letter-box">
-      <p class="letter-text">Kanna ❤️
-
-I LOVE YOU
-
-Nikosam first time website create cheyyadam try chesa.
-Perfect kakapoyina,
-naa prema matram perfect.
-
-Every smile of yours
-means the world to me.
-
-Thank you for coming into my life.
-
-I LOVE YOU FOREVER ❤️</p>
-    </div>
-  </div>
+body{margin:0;font-family:Arial;background:linear-gradient(135deg,#ff9a9e,#fad0c4);display:flex;justify-content:center;align-items:center;min-height:100vh}
+.box{background:#fff;padding:25px;border-radius:20px;max-width:500px;width:92%;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+button{padding:12px 18px;border:none;border-radius:30px;background:#ff4081;color:#fff;font-size:18px;cursor:pointer;margin:8px;width:100%}
+input{padding:10px;width:90%;border-radius:20px;border:2px solid #ff4081}
+.flower{position:fixed;top:-30px;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+</style></head><body>
+<audio id="bgMusic" loop><source src="love-song.mp3" type="audio/mpeg"></audio>
+<div class="box" id="app">
+<h2>💖 Hi Laddu 💖</h2>
+<div id="content"></div>
 </div>
-
 <script>
-let choices = {
-  q1: "",
-  q2: "",
-  q3: ""
-};
-
-// ⚠️ REPLACE THIS WITH YOUR OWN WHATSAPP NUMBER 
-// Include country code without '+' or spaces (e.g., 919876543210 for India)
-const MY_PHONE_NUMBER = "+91 9985286232"; 
-
-function startSurprise() {
-  alert("Welcome My Kanna ❤️");
-  document.getElementById("start-box").style.display = "none";
-  showQuestion1();
+const phone="919985286232";
+const qs=[
+["What do you want to eat right now? 😋",["Ice Cream 🍦","Chocolate 🍫"]],
+["What do you want to drink right now? 🥤",["Badampalu 🥛","Other Juice 🍹"],true],
+["When you look at me, what's the first thing you feel? 🥺❤️",["Safe & at home 🏡","Heart skips beats 💓"]],
+["What makes you smile about me? 🥰",["Our talks 💬","Your care 🤗"]],
+["Freeze one moment forever? ⏳",["Late-night chats 🌙","Holding hands 🤝"]],
+["How much do you miss me? 🥺",["Every second ⏰","Always 💭"]],
+["Perfect evening? 🌅",["Sunset together 🌇","One blanket 🧸"]],
+["Do you know how special you are? ❤️",["Yes ✨","Tell me again 🙈"]],
+["Promise forever? 💍",["Never leave your hand 🫂","Make you laugh 👵👴"]],
+["Will you stay my happiness? ❤️",["Forever ♾️","Always 💕"]]
+];
+let i=0,ans=[];
+function start(){bgMusic.volume=.3;bgMusic.play();next();}
+function next(){
+if(i>=qs.length){finish();return;}
+let q=qs[i],h='<h3>'+q[0]+'</h3>';
+if(q[2]){
+h+='<button onclick="pick(\'Badampalu 🥛\')">Badampalu 🥛</button><button onclick="other()">Other Juice 🍹</button>';
+}else q[1].forEach(o=>h+='<button onclick="pick(`'+o+'`)">'+o+'</button>');
+content.innerHTML=h;
 }
-
-function showQuestion1() {
-  let box = document.getElementById("question-box");
-  box.style.display = "block";
-  document.getElementById("question-title").innerText = "Where would you like to go on our dream date? ✨";
-  
-  let btnContainer = document.getElementById("option-buttons");
-  btnContainer.innerHTML = `
-    <button onclick="selectQ1('Cozy Candlelight Dinner 🕯️')">Cozy Candlelight Dinner 🕯️</button>
-    <button onclick="selectQ1('Long Drive Under the Stars 🌌')">Long Drive Under the Stars 🌌</button>
-  `;
+function other(){content.innerHTML='<h3>'+qs[i][0]+'</h3><input id=t placeholder="Type juice"><button onclick="pick(document.getElementById(\'t\').value)">Next</button>'}
+function pick(a){ans.push([qs[i][0],a]);i++;next();}
+function finish(){
+let s='<h2>💝 Your Choices 💝</h2>';ans.forEach(x=>s+='<p><b>'+x[0]+'</b><br>'+x[1]+'</p>');
+s+='<button onclick="wa()">Send via WhatsApp 💬</button><hr><p><b>Laddu ❤️</b><br>I LOVE YOU.<br>This is my first website made just for you. Maybe it isn't perfect, but my love for you is. ❤️</p>';
+content.innerHTML=s;
 }
-
-function selectQ1(choice) {
-  choices.q1 = choice;
-  showQuestion2();
+function wa(){
+let m='My answers:%0A%0A';
+ans.forEach(x=>m+='• '+x[0]+' -> '+x[1]+'%0A');
+open('https://wa.me/'+phone+'?text='+m);
 }
-
-function showQuestion2() {
-  document.getElementById("question-title").innerText = "What is your favorite way to spend time together? 🫂";
-  
-  let btnContainer = document.getElementById("option-buttons");
-  btnContainer.innerHTML = `
-    <button onclick="selectQ2('Holding hands & deep talks 💬')">Holding hands & deep talks 💬</button>
-    <button onclick="selectQ2('Cuddling & watching a movie 🎬')">Cuddling & watching a movie 🎬</button>
-  `;
-}
-
-function selectQ2(choice) {
-  choices.q2 = choice;
-  showQuestion3();
-}
-
-function showQuestion3() {
-  document.getElementById("question-title").innerText = "How much do you love me? 👀❤️";
-  
-  let btnContainer = document.getElementById("option-buttons");
-  btnContainer.innerHTML = `
-    <button onclick="selectQ3('To the moon and back! 🌙')">To the moon and back! 🌙</button>
-    <button onclick="selectQ3('Infinitely more than words can say! ♾️')">Infinitely more than words can say! ♾️</button>
-  `;
-}
-
-function selectQ3(choice) {
-  choices.q3 = choice;
-  showFinalScreen();
-}
-
-function showFinalScreen() {
-  document.getElementById("question-box").style.display = "none";
-  document.getElementById("final-box").style.display = "block";
-  
-  document.getElementById("summary-content").innerHTML = `
-    <strong>• Dream Date:</strong> ${choices.q1}<br>
-    <strong>• Favorite Time:</strong> ${choices.q2}<br>
-    <strong>• Love Level:</strong> ${choices.q3}
-  `;
-}
-
-function sendToWhatsApp() {
-  let message = `Hey! Here are my choices from your website surprise: \n\n` +
-                `✨ Dream Date: ${choices.q1}\n` +
-                `🫂 Favorite Time: ${choices.q2}\n` +
-                `❤️ Love Level: ${choices.q3}\n\n` +
-                `I read your beautiful letter too! 🥰`;
-                
-  let encodedMessage = encodeURIComponent(message);
-  let whatsappUrl = `https://wa.me/${MY_PHONE_NUMBER}?text=${encodedMessage}`;
-  
-  window.open(whatsappUrl, '_blank');
-}
-
-// Falling flowers effect
-for(let i=0;i<60;i++){
-  let flower=document.createElement("div");
-  flower.className="flower";
-  flower.innerHTML=Math.random()>0.5?"🌹":"🌸";
-  flower.style.left=Math.random()*100+"vw";
-  flower.style.animationDuration=5+Math.random()*6+"s";
-  flower.style.animationDelay=Math.random()*5+"s";
-  document.body.appendChild(flower);
-}
-</script>
-
-</body>
-</html>
+content.innerHTML='<button onclick="start()">Open Your Surprise ❤️</button>';
+for(let k=0;k<50;k++){let f=document.createElement('div');f.className='flower';f.innerHTML=Math.random()>.5?'🌹':'🌸';f.style.left=Math.random()*100+'vw';f.style.animationDuration=5+Math.random()*5+'s';document.body.appendChild(f);}
+</script></body></html>
