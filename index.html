@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Laddu ❤️</title>
+<title>For My Kanna ❤️</title>
 <style>
 *{
 margin:0;
@@ -65,6 +65,15 @@ button:hover {
 transform:scale(1.05);
 background:#ff0055;
 }
+.whatsapp-btn {
+background: #25D366;
+margin-top: 15px;
+padding: 12px 20px;
+font-size: 18px;
+}
+.whatsapp-btn:hover {
+background: #128C7E;
+}
 .summary-text {
 font-size: 18px;
 color: #444;
@@ -113,7 +122,7 @@ to { opacity: 1; transform: scale(1); }
 <div class="container">
   <!-- Start Screen -->
   <div id="start-box" class="box">
-    <h1>💖 Hi Laddu 💖</h1>
+    <h1>💖 Hi Kanna 💖</h1>
     <div class="btn-container">
       <button onclick="startSurprise()">Open Your Surprise ❤️</button>
     </div>
@@ -130,9 +139,12 @@ to { opacity: 1; transform: scale(1); }
     <h1 style="color: #ff4081; font-size: 32px; text-shadow: none; margin-bottom: 15px;">💝 Your Choices! 💝</h1>
     <div class="summary-text" id="summary-content"></div>
     
+    <!-- WhatsApp Action Button -->
+    <button class="whatsapp-btn" onclick="sendToWhatsApp()">Send Answers to Me via WhatsApp 💬</button>
+    
     <!-- Your Personal Letter -->
     <div class="letter-box">
-      <p class="letter-text">Laddu ❤️
+      <p class="letter-text">Kanna ❤️
 
 I LOVE YOU
 
@@ -147,19 +159,22 @@ Thank you for coming into my life.
 
 I LOVE YOU FOREVER ❤️</p>
     </div>
-    <h3 style="color: #ff0055; margin-top: 20px; font-size: 20px;">Hehe! I am waiting... 🥰 Let me know!</h3>
   </div>
 </div>
 
 <script>
 let choices = {
-  food: "",
-  chocolate: "",
-  reaction: ""
+  q1: "",
+  q2: "",
+  q3: ""
 };
 
+// ⚠️ REPLACE THIS WITH YOUR OWN WHATSAPP NUMBER 
+// Include country code without '+' or spaces (e.g., 919876543210 for India)
+const MY_PHONE_NUMBER = "919059737526"; 
+
 function startSurprise() {
-  alert("Welcome My Laddu ❤️");
+  alert("Welcome My Kanna ❤️");
   document.getElementById("start-box").style.display = "none";
   showQuestion1();
 }
@@ -167,46 +182,47 @@ function startSurprise() {
 function showQuestion1() {
   let box = document.getElementById("question-box");
   box.style.display = "block";
-  document.getElementById("question-title").innerText = "What do you want to eat right now? 😋";
+  document.getElementById("question-title").innerText = "Where would you like to go on our dream date? ✨";
   
   let btnContainer = document.getElementById("option-buttons");
   btnContainer.innerHTML = `
-    <button onclick="selectFood('Ice Cream 🍦')">Ice Cream 🍦</button>
-    <button onclick="selectFood('Badampalu 🥛')">Badampalu 🥛</button>
+    <button onclick="selectQ1('Cozy Candlelight Dinner 🕯️')">Cozy Candlelight Dinner 🕯️</button>
+    <button onclick="selectQ1('Long Drive Under the Stars 🌌')">Long Drive Under the Stars 🌌</button>
   `;
 }
 
-function selectFood(choice) {
-  choices.food = choice;
+function selectQ1(choice) {
+  choices.q1 = choice;
   showQuestion2();
 }
 
 function showQuestion2() {
-  document.getElementById("question-title").innerText = "Which chocolate do you want? 🍫";
+  document.getElementById("question-title").innerText = "What is your favorite way to spend time together? 🫂";
+  
   let btnContainer = document.getElementById("option-buttons");
   btnContainer.innerHTML = `
-    <button onclick="selectChocolate('Dairy Milk Silk 🏷️')">Dairy Milk Silk 🏷️</button>
-    <button onclick="selectChocolate('Fruit and Nut 🥜')">Fruit and Nut 🥜</button>
+    <button onclick="selectQ2('Holding hands & deep talks 💬')">Holding hands & deep talks 💬</button>
+    <button onclick="selectQ2('Cuddling & watching a movie 🎬')">Cuddling & watching a movie 🎬</button>
   `;
 }
 
-function selectChocolate(choice) {
-  choices.chocolate = choice;
+function selectQ2(choice) {
+  choices.q2 = choice;
   showQuestion3();
 }
 
 function showQuestion3() {
-  document.getElementById("question-title").innerText = "Will you give me a hug, kiss, or a slap after seeing this? 😂❤️";
+  document.getElementById("question-title").innerText = "How much do you love me? 👀❤️";
+  
   let btnContainer = document.getElementById("option-buttons");
   btnContainer.innerHTML = `
-    <button onclick="selectReaction('Hug 🤗')">Hug 🤗</button>
-    <button onclick="selectReaction('Kiss 😘')">Kiss 😘</button>
-    <button onclick="selectReaction('Slap 👋 (Oh no!)')">Slap 👋</button>
+    <button onclick="selectQ3('To the moon and back! 🌙')">To the moon and back! 🌙</button>
+    <button onclick="selectQ3('Infinitely more than words can say! ♾️')">Infinitely more than words can say! ♾️</button>
   `;
 }
 
-function selectReaction(choice) {
-  choices.reaction = choice;
+function selectQ3(choice) {
+  choices.q3 = choice;
   showFinalScreen();
 }
 
@@ -215,10 +231,23 @@ function showFinalScreen() {
   document.getElementById("final-box").style.display = "block";
   
   document.getElementById("summary-content").innerHTML = `
-    <strong>• Food:</strong> ${choices.food}<br>
-    <strong>• Chocolate:</strong> ${choices.chocolate}<br>
-    <strong>• Your Reaction:</strong> ${choices.reaction}
+    <strong>• Dream Date:</strong> ${choices.q1}<br>
+    <strong>• Favorite Time:</strong> ${choices.q2}<br>
+    <strong>• Love Level:</strong> ${choices.q3}
   `;
+}
+
+function sendToWhatsApp() {
+  let message = `Hey! Here are my choices from your website surprise: \n\n` +
+                `✨ Dream Date: ${choices.q1}\n` +
+                `🫂 Favorite Time: ${choices.q2}\n` +
+                `❤️ Love Level: ${choices.q3}\n\n` +
+                `I read your beautiful letter too! 🥰`;
+                
+  let encodedMessage = encodeURIComponent(message);
+  let whatsappUrl = `https://wa.me/${MY_PHONE_NUMBER}?text=${encodedMessage}`;
+  
+  window.open(whatsappUrl, '_blank');
 }
 
 // Falling flowers effect
